@@ -1,0 +1,46 @@
+VERIFICACAO DO AMBIENTE CLOUD-INIT
+Data: 20/10/2026
+VM: servidor-devops
+Box: ubuntu/jammy64
+Porta web efetiva: localhost:2200 -> guest:80
+
+cloud-init status --long
+status: done
+extended_status: done
+datasource: DataSourceNoCloud
+errors: []
+recoverable_errors: {}
+
+id meu-usuario
+uid=1002(meu-usuario) gid=1002(meu-usuario) groups=1002(meu-usuario),27(sudo),120(docker)
+
+groups meu-usuario
+meu-usuario : meu-usuario sudo docker
+
+sudo -n whoami
+root
+
+systemctl is-enabled nginx
+enabled
+
+systemctl is-active nginx
+active
+
+systemctl is-enabled docker
+enabled
+
+systemctl is-active docker
+active
+
+getent group docker
+docker:x:120:meu-usuario
+
+stat -c '%A %U:%G %n' /var/www/html/index.html
+-rw-r--r-- www-data:www-data /var/www/html/index.html
+
+curl --fail http://127.0.0.1/
+HTTP 200; conteúdo contém "Ambiente DevOps Provisionado" e "Cloud-Init".
+
+Verificação pelo host
+Invoke-WebRequest http://127.0.0.1:2200/
+HTTP 200; CUSTOM_PAGE_OK

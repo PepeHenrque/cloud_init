@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Verificação Cloud-Init e serviços</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 32px;
+      background: #111827;
+      color: #e5e7eb;
+      font-family: Consolas, "Courier New", monospace;
+    }
+    main {
+      max-width: 1100px;
+      margin: auto;
+      background: #030712;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, .35);
+    }
+    h1 {
+      color: #93c5fd;
+      font-size: 24px;
+      margin-top: 0;
+    }
+    .meta {
+      color: #9ca3af;
+      margin-bottom: 20px;
+    }
+    pre {
+      line-height: 1.55;
+      white-space: pre-wrap;
+      margin: 0;
+    }
+    .ok {
+      color: #86efac;
+      font-weight: 700;
+    }
+    .label {
+      color: #fcd34d;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Verificação do Cloud-Init e dos serviços</h1>
+    <div class="meta">VM: servidor-devops | Ubuntu 22.04 | Data: 20/10/2026</div>
+    <pre><span class="label">CLOUD-INIT</span>
+status: <span class="ok">done</span>
+extended_status: <span class="ok">done</span>
+errors: []
+recoverable_errors: {}
+
+<span class="label">USUARIO</span>
+uid=1002(meu-usuario) gid=1002(meu-usuario) groups=1002(meu-usuario),27(sudo),120(docker)
+meu-usuario : meu-usuario <span class="ok">sudo docker</span>
+
+<span class="label">SUDO</span>
+<span class="ok">root</span>
+
+<span class="label">NGINX</span>
+enabled
+<span class="ok">active</span>
+
+<span class="label">DOCKER</span>
+enabled
+<span class="ok">active</span>
+
+<span class="label">GRUPO-DOCKER</span>
+docker:x:120:meu-usuario
+
+<span class="label">ARQUIVO</span>
+-rw-r--r-- www-data:www-data /var/www/html/index.html</pre>
+  </main>
+</body>
+</html>
